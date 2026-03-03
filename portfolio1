@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio – Solofosoa Assaphe Elisette</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --dark: #1a1208;
+    --gold: #c9a84c;
+    --rose: #d4756b;
+    --sage: #7a9e7e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--cream); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; gap: 2rem; padding: 1.2rem 2rem;
+    background: rgba(26,18,8,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  nav a { color: var(--cream); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+  nav a:hover { opacity: 1; color: var(--gold); }
+
+  section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 2rem 4rem; position: relative; flex-direction: column; gap: 2.5rem; }
+
+  /* PAGE 1 */
+  #accueil {
+    background: radial-gradient(ellipse 60% 60% at 80% 20%, rgba(201,168,76,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 50% at 10% 80%, rgba(212,117,107,0.1) 0%, transparent 60%), var(--dark);
+    text-align: center;
+  }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 9vw, 7rem); line-height: 1.05; margin: 1rem 0 1.5rem; opacity: 0; animation: fadeUp 0.9s 0.6s forwards; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; opacity: 0; max-width: 480px; line-height: 1.7; animation: fadeUp 0.9s 0.9s forwards; }
+  .hero-cta { margin-top: 1rem; opacity: 0; animation: fadeUp 0.9s 1.2s forwards; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn { padding: 0.85rem 2.2rem; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; cursor: pointer; }
+  .btn-gold { background: var(--gold); color: var(--dark); border: 2px solid var(--gold); }
+  .btn-gold:hover { background: transparent; color: var(--gold); }
+  .btn-outline { background: transparent; color: var(--cream); border: 2px solid rgba(245,240,232,0.3); }
+  .btn-outline:hover { border-color: var(--cream); }
+  .scroll-indicator { position: absolute; bottom: 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeIn 1s 2s forwards; }
+  .scroll-indicator span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s infinite; }
+
+  /* PAGE 2 */
+  #apropos { background: radial-gradient(ellipse 50% 70% at 5% 50%, rgba(122,158,126,0.08) 0%, transparent 60%), var(--dark); }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 800px; width: 100%; align-items: start; }
+  .about-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .info-row { border-bottom: 1px solid rgba(245,240,232,0.1); padding-bottom: 1rem; }
+  .info-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .info-value { font-size: 1.05rem; font-weight: 500; }
+  .about-card { background: rgba(245,240,232,0.04); border: 1px solid rgba(245,240,232,0.08); border-radius: 4px; padding: 2rem; }
+  .about-card p { font-weight: 300; line-height: 1.8; font-size: 0.95rem; opacity: 0.85; }
+
+  /* PAGE 3 */
+  #objectifs { background: radial-gradient(ellipse 60% 50% at 100% 50%, rgba(212,117,107,0.08) 0%, transparent 60%), var(--dark); }
+  .goal-main { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 2.5rem); font-style: italic; color: var(--gold); max-width: 700px; line-height: 1.3; text-align: center; }
+  .axes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 800px; width: 100%; }
+  .axe-card { padding: 2rem 1.5rem; border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; position: relative; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+  .axe-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+  .axe-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.5); }
+  .axe-card:hover::before { transform: scaleX(1); }
+  .axe-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 0.8rem; }
+  .axe-text { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; }
+
+  /* PAGE 4 */
+  #contact { background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 60%), var(--dark); text-align: center; }
+  .contact-items { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 2.5rem; border: 1px solid rgba(245,240,232,0.1); border-radius: 2px; transition: border-color 0.3s, background 0.3s; text-decoration: none; color: var(--cream); font-size: 1rem; }
+  .contact-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .contact-icon { font-size: 1.3rem; }
+  .merci-block { max-width: 500px; padding: 2.5rem; background: rgba(245,240,232,0.03); border: 1px solid rgba(245,240,232,0.08); border-radius: 4px; }
+  .merci-block h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--gold); }
+  .merci-block p { font-weight: 300; line-height: 1.8; opacity: 0.8; }
+  .footer-line { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.3; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#accueil">Accueil</a>
+  <a href="#apropos">À Propos</a>
+  <a href="#objectifs">Objectifs</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- PAGE 1 -->
+<section id="accueil">
+  <p class="hero-eyebrow">Portfolio</p>
+  <h1 class="hero-title">Bienvenue sur<br><em>mon espace</em></h1>
+  <p class="hero-sub">Je vous invite à explorer mon univers, découvrir qui je suis et ce que j'aspire à devenir.</p>
+  <div class="hero-cta">
+    <a href="#apropos" class="btn btn-gold">Me découvrir</a>
+    <a href="#contact" class="btn btn-outline">Me contacter</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Défiler</span>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section id="apropos">
+  <div style="max-width:800px;width:100%">
+    <p class="section-label reveal">Qui suis-je ?</p>
+    <h2 class="section-title reveal reveal-delay-1">À <em>propos</em> de moi</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-info">
+      <div class="info-row reveal"><p class="info-label">Nom</p><p class="info-value">ANDRIHERINTSAINIAVO</p></div>
+      <div class="info-row reveal reveal-delay-1"><p class="info-label">Prénoms</p><p class="info-value">Solofosoa Assaphe Elisette</p></div>
+      <div class="info-row reveal reveal-delay-2"><p class="info-label">Âge</p><p class="info-value">17 ans</p></div>
+      <div class="info-row reveal reveal-delay-3"><p class="info-label">École</p><p class="info-value">École de Management et d'Innovation Technologique</p></div>
+    </div>
+    <div class="about-card reveal reveal-delay-1">
+      <p>Étudiante passionnée par la technologie, je me forme chaque jour avec curiosité et détermination. Mon parcours à l'EMIT m'ouvre les portes d'un avenir numérique que je souhaite contribuer à construire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section id="objectifs">
+  <div style="max-width:800px;width:100%;text-align:center">
+    <p class="section-label reveal">Ma vision</p>
+    <h2 class="section-title reveal reveal-delay-1">Mes <em>Objectifs</em></h2>
+  </div>
+  <p class="goal-main reveal">"Mon but : devenir une développeuse web accomplie et bâtir ma propre entreprise tech."</p>
+  <div style="max-width:800px;width:100%">
+    <p class="section-label reveal" style="margin-bottom:1rem">Axes stratégiques</p>
+    <div class="axes-grid">
+      <div class="axe-card reveal">
+        <div class="axe-num">01</div>
+        <p class="axe-text">Finir mes études avec excellence et acquérir toutes les compétences nécessaires.</p>
+      </div>
+      <div class="axe-card reveal reveal-delay-1">
+        <div class="axe-num">02</div>
+        <p class="axe-text">Avoir une carrière professionnelle solide dans le développement web.</p>
+      </div>
+      <div class="axe-card reveal reveal-delay-2">
+        <div class="axe-num">03</div>
+        <p class="axe-text">Créer ma propre entreprise tech et contribuer à l'innovation africaine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4 -->
+<section id="contact">
+  <div>
+    <p class="section-label reveal">Me retrouver</p>
+    <h2 class="section-title reveal reveal-delay-1">Contact</h2>
+  </div>
+  <div class="contact-items">
+    <a class="contact-item reveal" href="tel:0385752629">
+      <span class="contact-icon">📞</span><span>038 575 2629</span>
+    </a>
+    <a class="contact-item reveal reveal-delay-1" href="mailto:andriherintsainiavoassaphe@gmail.com">
+      <span class="contact-icon">✉️</span><span>andriherintsainiavoassaphe@gmail.com</span>
+    </a>
+  </div>
+  <div class="merci-block reveal">
+    <h3>Merci ✦</h3>
+    <p>Merci d'avoir pris le temps de visiter mon portfolio. Votre présence ici me touche profondément et m'encourage à continuer d'avancer vers mes rêves. À bientôt !</p>
+  </div>
+  <p class="footer-line reveal">© 2026 — Solofosoa Assaphe Elisette</p>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
